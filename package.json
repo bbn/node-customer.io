@@ -6,7 +6,7 @@
   "tags": ["customer.io", "email", "events"],
   "repository": {
     "type": "git",
-    "url": "git@github.com:bbn/node-customer.io"
+    "url": "https://github.com/bbn/node-customer.io.git"
   },
   "main": "./index.js",
   "engines": {

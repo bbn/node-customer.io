@@ -2,11 +2,11 @@
   "author": "Liam Don <liam@classdojo.com>",
   "name": "customer.io",
   "description": "A simple interface to the customer.io REST api",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "tags": ["customer.io", "email", "events"],
   "repository": {
     "type": "git",
-    "url": "git@github.com:liamdon/node-customer.io"
+    "url": "git@github.com:bbn/node-customer.io"
   },
   "main": "./index.js",
   "engines": {

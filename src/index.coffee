@@ -38,7 +38,7 @@ init = (siteId, secretKey) ->
   methods = {}
   methods.http = (method, path, authString, data, callback) ->
 
-    data = querystring.stringify(data)
+    data = JSON.stringify(data)
 
     options = {
       host: hostname,
@@ -47,7 +47,7 @@ init = (siteId, secretKey) ->
       method: method,
       headers: {
         'Authorization': authString,
-        'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Type': 'application/json',
         'Content-Length': data.length
       }
     }
@@ -111,11 +111,10 @@ init = (siteId, secretKey) ->
     if typeof data is 'function'
       callback = data
       data = null
-    attributes = {}
+    attributes = 
+      name: eventName
+      data: data  
     path = apiUrlPatterns[1].replace "{CUSTOMER_ID}", customerId
-    attributes.name = eventName
-    for key, value of data
-      attributes["data[#{key}]"] = value
     return methods.http 'POST', path, authString, attributes, callback
   # -------------------------------
 

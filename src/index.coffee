@@ -1,6 +1,7 @@
 
 https       = require('https')
 querystring = require('querystring')
+request     = require "request"
 
 DEFAULT_API_ENDPOINT  = "app.customer.io/api"
 DEFAULT_API_URL_PATTERNS = [
@@ -52,12 +53,14 @@ init = (siteId, secretKey) ->
       }
     }
 
-    req = https.request options, (res) ->
-      if callback?
-        return callback(res)
+    request
+      uri: "#{options.host}#{options.path}"
+      method: options.method
+      port: 443
+      headers: options.headers
+    ,(err,response,body) ->
+      callback err,body
 
-    req.write(data)
-    return req.end()
   # -------------------------------
 
 

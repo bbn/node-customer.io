@@ -54,12 +54,12 @@ init = (siteId, secretKey) ->
     }
 
     request
-      uri: "#{options.host}#{options.path}"
+      uri: "https://#{options.host}#{options.path}"
       method: options.method
       port: 443
       headers: options.headers
-    ,(err,response,body) ->
-      callback err,body
+      body: data
+    ,callback
 
   # -------------------------------
 
@@ -102,7 +102,7 @@ init = (siteId, secretKey) ->
       callback = data
       data = null
     attributes = data or {}
-    path = apiUrlPatterns[0].replace "{CUSTOMER_ID}", customerId
+    path = apiUrlPatterns[0].replace "{CUSTOMER_ID}", encodeURIComponent(customerId)
     attributes.email = email
     return methods.http 'PUT', path, authString, attributes, callback
 
@@ -117,7 +117,7 @@ init = (siteId, secretKey) ->
     attributes = 
       name: eventName
       data: data  
-    path = apiUrlPatterns[1].replace "{CUSTOMER_ID}", customerId
+    path = apiUrlPatterns[1].replace "{CUSTOMER_ID}", encodeURIComponent(customerId)
     return methods.http 'POST', path, authString, attributes, callback
   # -------------------------------
 
